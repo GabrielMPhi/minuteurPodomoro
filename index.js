@@ -1,9 +1,11 @@
 let countdown = 0; // variable to set/clear intervals
-let seconds = 1500; // seconds left on the clock
-let workTime = 25;
-let breakTime = 5;
-let isBreak = true;
-let isPaused = true;
+let secondes = 1500; // secondes left on the clock
+let tempsTravail = 25;
+let tempsPause = 5;
+let enBreak = true;
+let enPause = true;
+
+let resultat = 0;
 
 const status = document.querySelector("#status");
 const timerDisplay = document.querySelector(".timerDisplay");
@@ -11,50 +13,53 @@ const startBtn = document.querySelector("#start-btn");
 const resetBtn = document.querySelector("#reset");
 const workMin = document.querySelector("#work-min");
 const breakMin = document.querySelector("#break-min");
+const resultatAffichage = document.querySelector("#resultatAffichage");
 
-const alarm = document.createElement('audio'); // A bell sound will play when the timer reaches 0
+const alarm = document.createElement('audio'); // Un son de cloche qui sonne à la fin du travail.
 alarm.setAttribute("src", "https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3");
 
 
 /* EVENT LISTENERS FOR START AND RESET BUTTONS */
 startBtn.addEventListener('click', () => {
   clearInterval(countdown);
-  isPaused = !isPaused;
-  if (!isPaused) {
+  enPause = !enPause;
+  if (!enPause) {
     countdown = setInterval(timer, 1000);
   }
 })
 
 resetBtn.addEventListener('click', () => {
   clearInterval(countdown);
-  seconds = workTime * 60;
+  secondes = tempsTravail * 60;
   countdown = 0;
-  isPaused = true;
-  isBreak = true;
+  enPause = true;
+  enBreak = true;
 })
 
 /* TIMER - HANDLES COUNTDOWN */
 function timer() {
-  seconds--;
-  if (seconds < 0) {
+  secondes--;
+  if (secondes < 0) {
     clearInterval(countdown);
     alarm.currentTime = 0;
     alarm.play();
-    seconds = (isBreak ? breakTime : workTime) * 60;
-    isBreak = !isBreak;
+    if(enBreak){      
+    resultat++;
+      }
+    secondes = (enBreak ? tempsPause : tempsTravail) * 60;
+    enBreak = !enBreak;
   }
 }
 
-
 /* UPDATE WORK AND BREAK TIMES */
-let increment = 5;
+let increment = 1;
 
 let incrementFunctions =
   {
-    "#work-plus": function () { workTime = Math.min(workTime + increment, 60) },
-    "#work-minus": function () { workTime = Math.max(workTime - increment, 5) },
-    "#break-plus": function () { breakTime = Math.min(breakTime + increment, 60) },
-    "#break-minus": function () { breakTime = Math.max(breakTime - increment, 5) }
+    "#work-plus": function () { tempsTravail = Math.min(tempsTravail + increment, 60) },
+    "#work-minus": function () { tempsTravail = Math.max(tempsTravail - increment, 1) },
+    "#break-plus": function () { tempsPause = Math.min(tempsPause + increment, 60) },
+    "#break-minus": function () { tempsPause = Math.max(tempsPause - increment, 1) }
   };
 
 for (var key in incrementFunctions) {
@@ -65,15 +70,15 @@ for (var key in incrementFunctions) {
 
 /* UPDATE HTML CONTENT */
 function countdownDisplay() {
-  let minutes = Math.floor(seconds / 60);
-  let remainderSeconds = seconds % 60;
-  timerDisplay.textContent = `${minutes}:${remainderSeconds < 10 ? '0' : ''}${remainderSeconds}`;
+  let minutes = Math.floor(secondes / 60);
+  let remaindersecondes = secondes % 60;
+  timerDisplay.textContent = `${minutes}:${remaindersecondes < 10 ? '0' : ''}${remaindersecondes}`;
 }
 
 function buttonDisplay() {
-  if (isPaused && countdown === 0) {
-    startBtn.textContent = "GO!";
-  } else if (isPaused && countdown !== 0) {
+  if (enPause && countdown === 0) {
+    startBtn.textContent = "Commencer!";
+  } else if (enPause && countdown !== 0) {
     startBtn.textContent = "Continue";
   } else {
     startBtn.textContent = "Pause";
@@ -83,9 +88,12 @@ function buttonDisplay() {
 function updateHTML() {
   countdownDisplay();
   buttonDisplay();
-  isBreak ? status.textContent = "Il faut continuer à travailler" : status.textContent = "Prend une pause!";
-  workMin.textContent = workTime;
-  breakMin.textContent = breakTime;
+  enBreak ? status.textContent = "Il faut travailler" : status.textContent = "Prend une pause!";
+  enPause ? statusAutre.textContent = "En attente..." : statusAutre.textContent = "TRAVAIL! ÉCRIT! GO!!!";
+  workMin.textContent = tempsTravail;
+  breakMin.textContent = tempsPause;
+  resultatAffichage.textContent = resultat;
+  
 }
 
 window.setInterval(updateHTML, 100);

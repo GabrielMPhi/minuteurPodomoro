@@ -1,52 +1,65 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"
+    />
+    <title>Horloge Podomoro</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
-  <title>Pomodoro Timer</title>
-</head>
+  <body>
+    <div class="title has-text-centered">
+      <h1>Horloge Pomodoro</h1>
+    </div>
 
-<body>
+    <div class="container has-text-centered">
+      <div id="pomodoro" class="container has-text-centered">
+        <div id="status" class="has-text-weight-semibold">
+          Il faut travailler!
+        </div>
+        <div class="timerDisplay">25:00</div>
+        <button id="start-btn" class="button">Go!</button>
+        <div id="statusAutre"></div>
+      </div>
+    </div>
 
-<div class="title has-text-centered">
-  <h1>Horloge Pomodoro</h1>
-</div>
-<div class="container has-text-centered"></div>
-  <div id="pomodoro" class="container has-text-centered">  
-    <div id="status"></div>
-    <div class="timerDisplay">25:00</div>
-    <button id="start-btn" class="button">Go!</button>
-  </div>
-</div>
-  
-  
     <div id="work" class="container has-text-centered">
       <div class="has-text-centered">
-      <h2>Durée du travail</h2>
-      <button class="button" id="work-plus">+</button>
-      <div class="level-item has-text-centered"><span id="work-min">25</span> mins</div>
-      <button class="button" id="work-minus">-</button>
+        <h2>Durée du travail</h2>
+        <div class="level-item has-text-centered">
+          <span id="work-min">25</span> mins
+        </div>
+        <div class="Columns">
+          <button class="button" id="work-plus">+</button>
+          <button class="button" id="work-minus">-</button>
+        </div>
+      </div>
+
+      <div class="container has-text-centered">
+        <button id="reset" class="button">Redémarer</button>
+      </div>
+      <div id="break" class="container has-text-centered">
+        <p>Durée de la pause</p>
+        <div><span id="break-min">5</span> mins</div>
+        <button class="button" id="break-plus">+</button>
+        <button class="button" id="break-minus">-</button>
+      </div>
     </div>
-  </div>
-  <div class="container has-text-centered">
-    <button id="reset" class="button">RESET</button>
-  </div>
-    <div id="break" class="container has-text-centered">
-      <p>Durée de la pause</p>
-      <button class="button" id="break-plus">+</button>
-      <div><span id="break-min">5</span> mins</div>
-      <button class="button" id="break-minus">-</button>
+
+    <div class="container has-text-centered">
+      <div>Nombre de pomodoros :</div>
+      <span id="resultatAffichage" class="has-text-weight-semibold">5</span>
     </div>
-  
-  <p class="footer">Une création de <a href="https://www.gabrielmonette.info" target="blank">Gabriel Monette</a></p>
-</div>
 
-  
+    <p class="footer has-text-centered">
+      Une création de
+      <a href="https://www.gabrielmonette.info" target="blank"
+        >Gabriel Monette</a
+      >.
+    </p>
 
-    <script  src="index.js"></script>
-
-
-</body>
-
+    <script src="index.js"></script>
+  </body>
 </html>
