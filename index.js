@@ -89,7 +89,7 @@ function updateHTML() {
   countdownDisplay();
   buttonDisplay();
   enBreak ? status.textContent = "Il faut travailler" : status.textContent = "Prend une pause!";
-  enPause ? statusAutre.textContent = "En attente..." : statusAutre.textContent = "TRAVAIL! ÉCRIT! GO!!!";
+  enPause ? statusAutre.textContent = "En attente..." : statusAutre.textContent = "TRAVAILLE! ÉCRIT! GO!!!";
   workMin.textContent = tempsTravail;
   breakMin.textContent = tempsPause;
   resultatAffichage.textContent = resultat;
