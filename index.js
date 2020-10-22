@@ -14,6 +14,7 @@ const resetBtn = document.querySelector("#reset");
 const workMin = document.querySelector("#work-min");
 const breakMin = document.querySelector("#break-min");
 const resultatAffichage = document.querySelector("#resultatAffichage");
+const testSon = document.querySelector("#testSon");
 
 const alarm = document.createElement('audio'); // Un son de cloche qui sonne à la fin du travail.
 alarm.setAttribute("src", "https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3");
@@ -35,6 +36,11 @@ resetBtn.addEventListener('click', () => {
   enPause = true;
   enBreak = true;
 })
+
+testSon.addEventListener('click', () => {
+alarm.play()
+})
+
 
 /* TIMER - HANDLES COUNTDOWN */
 function timer() {
