@@ -15,6 +15,7 @@ const workMin = document.querySelector("#work-min");
 const breakMin = document.querySelector("#break-min");
 const resultatAffichage = document.querySelector("#resultatAffichage");
 const testSon = document.querySelector("#testSon");
+const valueProgressBar = document.querySelector("#progressBar");
 
 const alarm = document.createElement('audio'); // Un son de cloche qui sonne à la fin du travail.
 alarm.setAttribute("src", "https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3");
@@ -96,6 +97,8 @@ function updateHTML() {
   buttonDisplay();
   enBreak ? status.textContent = "Il faut travailler" : status.textContent = "Prend une pause!";
   enPause ? statusAutre.textContent = "En attente..." : statusAutre.textContent = "TRAVAILLE! ÉCRIT! GO!!!";
+  valueProgressBar.value = countdown;
+  valueProgressBar.max = tempsTravail
   workMin.textContent = tempsTravail;
   breakMin.textContent = tempsPause;
   resultatAffichage.textContent = resultat;
